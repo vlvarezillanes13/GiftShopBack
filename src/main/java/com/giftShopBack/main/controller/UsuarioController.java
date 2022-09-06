@@ -33,7 +33,7 @@ public class UsuarioController {
 		return (Usuario) repositorio.save(usuario);
 	}
 	
-	@GetMapping("/validarUsuario")
+	@PostMapping("/validarUsuario")
 	public Usuario validateUsuario(@RequestBody LoginForm data) {
 		for (Usuario usuario : repositorio.findAll()) {
 			if( usuario.getUsername().equals(data.getUsername()) && usuario.getPassword().equals(data.getPassword()) && usuario.getEstado()) {
