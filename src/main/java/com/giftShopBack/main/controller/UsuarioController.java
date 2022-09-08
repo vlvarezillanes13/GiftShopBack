@@ -30,7 +30,10 @@ public class UsuarioController {
 	
 	@PostMapping("/addUsuario")
 	public Usuario addUsuario(@RequestBody Usuario usuario) {
-		return (Usuario) repositorio.save(usuario);
+		if( this.validarUsuario(usuario)) {
+			return (Usuario) repositorio.save(usuario);
+		}
+		return null;
 	}
 	
 	@PostMapping("/validarUsuario")
@@ -41,6 +44,13 @@ public class UsuarioController {
 			}
 		}
 		return null;
+	}
+	
+	//Función para validar usuario
+	private boolean validarUsuario(Usuario u) {
+		if( u.getUsername().length() < 5 ||  u.getUsername().length() > 20) { return false; }
+		else if( u.getPassword().length() < 5 ||  u.getPassword().length() > 20) { return false; }
+		return true;
 	}
 	
 }
