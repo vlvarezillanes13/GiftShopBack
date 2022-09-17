@@ -10,10 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.giftShopBack.main.excepciones.ResourceNotFoundException;
 import com.giftShopBack.main.models.Categoria;
-import com.giftShopBack.main.repositorio.CategoriaRepositorio;
+import com.giftShopBack.main.services.CategoriaService;
 
 @RestController()
 @RequestMapping("/api/categoria/")
@@ -21,23 +19,21 @@ import com.giftShopBack.main.repositorio.CategoriaRepositorio;
 public class CategoriaController {
 
 	@Autowired
-	private CategoriaRepositorio repositorio;
+	private CategoriaService categoriaService;
 
 	@GetMapping("/getCategorias")
 	public List<Categoria> getCategorias() {
-		return (List<Categoria>) repositorio.findAll();
+		return categoriaService.getAllCategorias();
 	}
 
 	@GetMapping("/getCategoria")
 	public Categoria getCategoria(@RequestParam Integer id) {
-		Categoria cat = repositorio.findById(id)
-				 	.orElseThrow(() -> new ResourceNotFoundException("No existe el categoria con el ID : " + id));
-		return  cat ;
+		return categoriaService.getCategoriaById(id);
 	}
-
+	
 	@PostMapping("/addCategoria")
 	public Categoria addCategoria(@RequestBody Categoria categoria) {
-		return (Categoria) repositorio.save(categoria);
+		return categoriaService.addCategoria(categoria);
 	}
 
 }
