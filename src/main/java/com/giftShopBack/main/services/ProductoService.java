@@ -28,7 +28,7 @@ public class ProductoService {
 	public List<Producto> getProductosByCategoria(Categoria cat) {
 		List<Producto> productos = new ArrayList<>();
 		for (Producto producto : repositorio_productos.findAll()) {
-			if( producto.getCategoria() == cat) {
+			if( producto.getCategoria().getId() == cat.getId()) {
 				productos.add(producto);
 			}
 		}
