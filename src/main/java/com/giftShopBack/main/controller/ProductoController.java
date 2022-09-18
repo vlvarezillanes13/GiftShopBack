@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import com.giftShopBack.main.models.Categoria;
 import com.giftShopBack.main.models.Producto;
 import com.giftShopBack.main.services.ProductoService;
 
@@ -28,8 +27,8 @@ public class ProductoController {
 	}
 
 	@GetMapping("/getProductosByCategoria")
-	public List<Producto> getProductosByCategoria(@RequestBody Categoria cat) {
-		return productoService.getProductosByCategoria(cat);
+	public List<Producto> getProductosByCategoria(@RequestParam Integer id ) {
+		return productoService.getProductosByCategoria(id);
 	}
 
 	@PostMapping("/addProducto")

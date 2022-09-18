@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.giftShopBack.main.excepciones.ResourceNotFoundException;
-import com.giftShopBack.main.models.Categoria;
 import com.giftShopBack.main.models.Producto;
 import com.giftShopBack.main.repositorio.CategoriaRepositorio;
 import com.giftShopBack.main.repositorio.ProductoRepositorio;
@@ -25,10 +24,10 @@ public class ProductoService {
 		return (List<Producto>) repositorio_productos.findAll();
 	}
 	
-	public List<Producto> getProductosByCategoria(Categoria cat) {
+	public List<Producto> getProductosByCategoria(Integer id) {
 		List<Producto> productos = new ArrayList<>();
 		for (Producto producto : repositorio_productos.findAll()) {
-			if( producto.getCategoria().getId() == cat.getId()) {
+			if( producto.getCategoria().getId() == id) {
 				productos.add(producto);
 			}
 		}
